@@ -10,7 +10,7 @@ import stores from '../stores'
   <script type="text/babel">
     this.mixin('controlMixin')
 
-    this.onControl(riot.SE.POSTS_CHANGED, _posts => {
+    this.onControl(riot.SE.POSTS_CHANGED, () => {
       this.readData()
     })
 
