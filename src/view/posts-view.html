@@ -1,4 +1,7 @@
-<posts-view>
+import RiotControl from 'riotcontrol'
+
+<posts-view class="ui three stackable cards">
+
   <postcell each={_posts} data={this}></postcell>
 
   <script type="text/babel">
@@ -6,7 +9,7 @@
     this._posts = []
 
     this.on('mount', () => {
-      riot.control.trigger(riot.VE.LOAD_POSTS)
+      RiotControl.trigger(riot.VE.LOAD_POSTS)
     })
 
     this.onControl(riot.SE.POSTS_CHANGED, posts => {

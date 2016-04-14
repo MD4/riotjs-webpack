@@ -1,11 +1,32 @@
 import stores from '../stores'
+import RiotControl from 'riotcontrol'
 
-<detail-view>
-  <h2>{_post.title}</h2>
-  <p>{_post.content}</p>
-  <p>{_post.likes} Likes</p>
-  <a if="{ opts.data > 1 }" href="#detail/{ opts.data - 1 }">Previous Post</a> |
-  <a if="{ opts.data < _total }" href="#detail/{ opts.data - -1 }">Next Post</a>
+<detail-view class="ui one cards">
+  <div class="ui card">
+    <div class="content">
+      <div class="header">
+        <h2>{_post.title}</h2>
+      </div>
+      <div class="description">
+        <p>Category: {_post.category}</p>
+        <p>{_post.content}</p>
+      </div>
+    </div>
+    <div class="extra content">
+      <span class="left floated like">
+        <i class="like icon" onclick={likePost}></i>
+        {_post.likes} Likes
+      </span>
+    </div>
+    <div class="extra content">
+      <span class="left floated like">
+        <a if="{ opts.data > 1 }" href="#detail/{ opts.data - 1 }">Previous Post</a>
+      </span>
+      <span class="right floated">
+        <a if="{ opts.data < _total }" href="#detail/{ opts.data - -1 }">Next Post</a>
+      </span>
+    </div>
+  </div>
 
   <script type="text/babel">
     this.mixin('controlMixin')
@@ -18,6 +39,10 @@ import stores from '../stores'
       this._post = stores.blog.getPostById(Number(opts.data))
       this._total = stores.blog._posts.length
       this.update()
+    }
+
+    this.likePost = () => {
+      RiotControl.trigger(riot.VE.LIKE_POST, this._post.postId)
     }
 
     this.readData()

@@ -1,8 +1,13 @@
+import RiotControl from 'riotcontrol'
+
 <categories-view>
   <div each={category, posts in _postsInCategories}>
-    <h3>{category}</h3>
-    <postcell each={posts} data={this}></postcell>
-    <hr>
+    <h4 class="ui horizontal divider header">
+      {category}
+    </h4>
+    <div class="ui three stackable cards">
+      <postcell each={posts} data={this}></postcell>
+    </div>
   </div>
 
   <script type="text/babel">
@@ -10,7 +15,7 @@
     this._postsInCategories = {}
 
     this.on('mount', () => {
-      riot.control.trigger(riot.VE.LOAD_POSTS)
+      RiotControl.trigger(riot.VE.LOAD_POSTS)
     })
 
     this.onControl(riot.SE.POSTS_CHANGED, posts => {
