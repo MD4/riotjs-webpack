@@ -1,10 +1,10 @@
 {
-  "private": true,
   "scripts": {
     "dev": "webpack-dev-server",
     "dist": "webpack -p -d",
     "viewdist": "light-server -s . -p 7000",
-    "lint": "eslint --ext .js,.es6,.html src/*"
+    "lint": "eslint --ext .js,.es6,.html src/*",
+    "postinstall": "cd semantic && gulp build && cd .."
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
