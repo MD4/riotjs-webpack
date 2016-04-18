@@ -7,10 +7,20 @@ This is my first experiment with riotjs, webpack &amp; semantic-ui.
 
 ## run
 
+### dev mode
+
 ```npm run dev```
 
 Then go to
 [http://localhost:5555/](http://localhost:5555/)
+
+### make a dist
+
+```npm run dist```
+
+### serve dist
+
+```npm run viewdist```
 
 ## todo
 
