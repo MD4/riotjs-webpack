@@ -1,7 +1,8 @@
 import RiotControl from 'riotcontrol'
 import blog from './BlogStore'
+import route from './RouteStore'
 
-const stores = { blog }
+const stores = { blog, route }
 
 Object
   .keys(stores)

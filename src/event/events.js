@@ -1,5 +1,7 @@
-import blog from './blog/blogEvents'
+import blog from './blogEvents'
+import route from './routeEvents'
 
 riot.events = {
-  blog
+  blog,
+  route
 }

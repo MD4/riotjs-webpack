@@ -1,4 +1,5 @@
 import RiotControl from 'riotcontrol'
+import stores from './store/stores'
 
 <app>
 
@@ -11,6 +12,7 @@ import RiotControl from 'riotcontrol'
     </header>
     <article>
       <div id="mainview"></div>
+      <div id="mainview2"></div>
     </article>
     <footer>
       <div class="ui divider"></div>
@@ -25,51 +27,48 @@ import RiotControl from 'riotcontrol'
     header {
       margin: 40px;
     }
+
     footer {
       margin: 40px;
     }
+
     .ui.divider {
       margin: 30px;
     }
   </style>
 
   <script type="text/babel">
-    this._currentView = null
+    this.mixin('controlMixin')
+    this.mixin('viewContainerMixin', { container: this.mainview })
+
     this._route = ''
 
     this.resetData = () => {
       RiotControl.trigger(riot.events.blog.view.RESET_DATA)
     }
 
-    this.loadView = (viewName, id) => {
-      if (this._currentView) {
-        this._currentView.unmount(true)
-      }
-      this._currentView = riot.mount('div#mainview', viewName, { data: id })[ 0 ]
-    }
-
-    this.studyRoute = (view, id) => {
-      switch (view) {
+    this.onControl(riot.events.route.store.ROUTE_CHANGED, (route, data) => {
+      console.log('onControl', route, data)
+      switch (route) {
         case 'categories':
           this.loadView('categories-view')
           break
         case 'detail':
-          this.loadView('detail-view', id)
+          this.loadView('detail-view', { postId: data })
           break
         case 'posts':
           this.loadView('posts-view')
           break
         default:
-          window.location.hash = 'posts'
+          RiotControl.trigger(riot.events.route.view.GOTO, 'posts')
       }
-      this._route = view
+      this._route = route
       this.update()
-    }
-
-    riot.route(this.studyRoute)
+    })
 
     this.on('mount', () => {
-      riot.route.start(true)
+      stores.route.start()
     })
+
   </script>
 </app>

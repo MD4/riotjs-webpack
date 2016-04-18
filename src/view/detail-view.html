@@ -36,7 +36,8 @@ import RiotControl from 'riotcontrol'
     })
 
     this.readData = () => {
-      this._post = stores.blog.getPostById(Number(opts.data))
+      console.log('readData', this)
+      this._post = stores.blog.getPostById(Number(opts.postId))
       this._total = stores.blog._posts.length
       this.update()
     }
