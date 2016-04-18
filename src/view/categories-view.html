@@ -15,10 +15,10 @@ import RiotControl from 'riotcontrol'
     this._postsInCategories = {}
 
     this.on('mount', () => {
-      RiotControl.trigger(riot.VE.LOAD_POSTS)
+      RiotControl.trigger(riot.events.blog.view.LOAD_POSTS)
     })
 
-    this.onControl(riot.SE.POSTS_CHANGED, posts => {
+    this.onControl(riot.events.blog.store.POSTS_CHANGED, posts => {
       this._postsInCategories = posts.reduce((map, post) => {
         map[ post.category ] = map[ post.category ] || []
         map[ post.category ].push(post)

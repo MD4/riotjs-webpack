@@ -35,10 +35,10 @@ import RiotControl from 'riotcontrol'
 
   <script type="text/babel">
     this._currentView = null
-    this._route = '';
+    this._route = ''
 
     this.resetData = () => {
-      RiotControl.trigger(riot.VE.RESET_DATA)
+      RiotControl.trigger(riot.events.blog.view.RESET_DATA)
     }
 
     this.loadView = (viewName, id) => {
@@ -60,10 +60,10 @@ import RiotControl from 'riotcontrol'
           this.loadView('posts-view')
           break
         default:
-          this.loadView('posts-view')
+          window.location.hash = 'posts'
       }
-      this._route = view;
-      this.update();
+      this._route = view
+      this.update()
     }
 
     riot.route(this.studyRoute)

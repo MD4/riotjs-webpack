@@ -1,6 +1,5 @@
 import RiotControl from 'riotcontrol'
 
-
 <postcell class="ui card">
   <div class="content">
     <div class="header">
@@ -21,7 +20,7 @@ import RiotControl from 'riotcontrol'
 
   <script type="text/babel">
     this.likePost = () => {
-      RiotControl.trigger(riot.VE.LIKE_POST, opts.data.postId)
+      RiotControl.trigger(riot.events.blog.view.LIKE_POST, opts.data.postId)
     }
   </script>
 </postcell>

@@ -1,4 +1,4 @@
-import stores from '../stores'
+import stores from '../store/stores'
 import RiotControl from 'riotcontrol'
 
 <detail-view class="ui one cards">
@@ -31,7 +31,7 @@ import RiotControl from 'riotcontrol'
   <script type="text/babel">
     this.mixin('controlMixin')
 
-    this.onControl(riot.SE.POSTS_CHANGED, () => {
+    this.onControl(riot.events.blog.store.POSTS_CHANGED, () => {
       this.readData()
     })
 
@@ -42,7 +42,7 @@ import RiotControl from 'riotcontrol'
     }
 
     this.likePost = () => {
-      RiotControl.trigger(riot.VE.LIKE_POST, this._post.postId)
+      RiotControl.trigger(riot.events.blog.view.LIKE_POST, this._post.postId)
     }
 
     this.readData()

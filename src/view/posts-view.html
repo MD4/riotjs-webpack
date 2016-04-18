@@ -9,10 +9,10 @@ import RiotControl from 'riotcontrol'
     this._posts = []
 
     this.on('mount', () => {
-      RiotControl.trigger(riot.VE.LOAD_POSTS)
+      RiotControl.trigger(riot.events.blog.view.LOAD_POSTS)
     })
 
-    this.onControl(riot.SE.POSTS_CHANGED, posts => {
+    this.onControl(riot.events.blog.store.POSTS_CHANGED, posts => {
       this._posts = posts
       this.update()
     })

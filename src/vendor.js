@@ -1,5 +1,3 @@
-// import './css/tacit.min.css'
-
 import './style/components/button.min.css'
 import './style/components/icon.min.css'
 import './style/components/label.min.css'
@@ -12,4 +10,3 @@ import './style/components/grid.min.css'
 
 import 'riot'
 import 'mappersmith'
-
