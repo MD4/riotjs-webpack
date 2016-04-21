@@ -4,23 +4,11 @@ import stores from './store/stores'
 <app>
 
   <div class="ui container">
-    <header>
-      <div class="ui two item menu">
-        <a class="item {active: _route == 'posts'}" href="#posts">Posts</a>
-        <a class="item {active: _route == 'categories'}" href="#categories">Categories</a>
-      </div>
-    </header>
-    <article>
-      <div id="mainview"></div>
-      <div id="mainview2"></div>
-    </article>
-    <footer>
-      <div class="ui divider"></div>
-      <div class="ui two row centered grid">
-        <a href="#" onclick={resetData}>Reset Data</a>
-        <a href="https://github.com/MD4" target="_blank">@MD4</a>
-      </div>
-    </footer>
+    <header></header>
+
+    <div id="mainview"></div>
+
+    <footer></footer>
   </div>
 
   <style scoped>
@@ -41,34 +29,18 @@ import stores from './store/stores'
     this.mixin('controlMixin')
     this.mixin('viewContainerMixin', { container: this.mainview })
 
-    this._route = ''
-
-    this.resetData = () => {
-      RiotControl.trigger(riot.events.blog.view.RESET_DATA)
-    }
-
     this.onControl(riot.events.route.store.ROUTE_CHANGED, (route, data) => {
-      console.log('onControl', route, data)
       switch (route) {
-        case 'categories':
-          this.loadView('categories-view')
-          break
-        case 'detail':
-          this.loadView('detail-view', { postId: data })
-          break
-        case 'posts':
-          this.loadView('posts-view')
+        case 'beers':
+          this.loadView('beers')
           break
         default:
-          RiotControl.trigger(riot.events.route.view.GOTO, 'posts')
+          RiotControl.trigger(riot.events.route.view.GOTO, 'beers')
       }
-      this._route = route
-      this.update()
     })
 
     this.on('mount', () => {
       stores.route.start()
     })
-
   </script>
 </app>

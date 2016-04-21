@@ -13,7 +13,6 @@ class RouteStore {
   }
 
   onRoute(view, data) {
-    console.log('onRoute', arguments)
     RiotControl.trigger(riot.events.route.store.ROUTE_CHANGED, view, data)
   }
 

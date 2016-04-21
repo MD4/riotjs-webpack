@@ -1,0 +1,18 @@
+<header>
+  <div class="ui two item menu">
+    <a class="item {active: _route == 'beers'}" href="#beers">Beers</a>
+    <a class="item {active: _route == 'breweries'}" href="#breweries">Breweries</a>
+  </div>
+
+  <script type="text/babel">
+    this.mixin('controlMixin')
+
+    this._route = ''
+
+    this.onControl(riot.events.route.store.ROUTE_CHANGED, (route) => {
+      this._route = route
+      this.update()
+    })
+
+  </script>
+</header>

@@ -5,7 +5,6 @@ riot.mixin('viewContainerMixin', {
     if (this._currentView) {
       this._currentView.unmount(true)
     }
-    console.log('loadView', viewName, data)
     this._currentView = riot.mount(this.container, viewName, data)[ 0 ]
   }
 })
