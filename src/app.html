@@ -29,10 +29,15 @@ import stores from './store/stores'
     this.mixin('controlMixin')
     this.mixin('viewContainerMixin', { container: this.mainview })
 
-    this.onControl(riot.events.route.store.ROUTE_CHANGED, (route, data) => {
-      switch (route) {
+    this.onControl(riot.events.route.store.ROUTE_CHANGED, (path) => {
+      if (!path[0]) return;
+      switch (path[0]) {
         case 'beers':
-          this.loadView('beers')
+          if (path[1]) {
+            this.loadView('beer-details', {beerId: path[1], hey: 'lol'})
+          } else {
+            this.loadView('beers', {hey: 'lol'})
+          }
           break
         default:
           RiotControl.trigger(riot.events.route.view.GOTO, 'beers')

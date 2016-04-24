@@ -1,0 +1,22 @@
+import RiotControl from 'riotcontrol'
+
+<beer-details class="ui">
+
+  <h1>{_beer.name}</h1>
+  <h2>{_beer.country}</h2>
+
+  <script type="text/babel">
+    this.mixin('controlMixin')
+    this._beer = null
+
+    this.on('mount', () => {
+      RiotControl.trigger(riot.events.beer.view.LOAD_BEER, opts.beerId)
+    })
+
+    this.onControl(riot.events.beer.store.BEER_CHANGED, beer => {
+      console.log('beerChanged', beer)
+      this._beer = beer
+      this.update()
+    })
+  </script>
+</beer-details>

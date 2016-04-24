@@ -10,6 +10,11 @@ class BeerStore {
       this.trigger(riot.events.beer.store.BEERS_CHANGED, this._beers)
     })
 
+    this.on(riot.events.beer.view.LOAD_BEER, (beerId) => {
+      console.log(beerId)
+      this.trigger(riot.events.beer.store.BEER_CHANGED, this.getBeerById(beerId + ''))
+    })
+
     this.on(riot.events.beer.view.RESET_DATA, () => {
       this.initData()
       this.trigger(riot.events.beer.store.BEERS_CHANGED, this._beers)
@@ -30,8 +35,8 @@ class BeerStore {
     this._beers = JSON.parse(JSON.stringify(dataBeers))
   }
 
-  getBeerById(id) {
-    return this._beers.filter(beer => beer.beerId === id)[ 0 ]
+  getBeerById(beerId) {
+    return this._beers.filter(beer => beer.id === beerId)[ 0 ]
   }
 }
 

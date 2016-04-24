@@ -12,8 +12,9 @@ class RouteStore {
     })
   }
 
-  onRoute(view, data) {
-    RiotControl.trigger(riot.events.route.store.ROUTE_CHANGED, view, data)
+  onRoute(args) {
+    var path = Array.prototype.slice.call(arguments)
+    RiotControl.trigger(riot.events.route.store.ROUTE_CHANGED, path)
   }
 
   start() {
