@@ -1,7 +1,7 @@
 <header>
   <div class="ui two item menu">
-    <a class="item {active: _route == 'beers'}" href="#beers">Beers</a>
-    <a class="item {active: _route == 'breweries'}" href="#breweries">Breweries</a>
+    <a class="item {active: _route == 'board.beers'}" href="#board/beers">Beers</a>
+    <a class="item {active: _route == 'board.breweries'}" href="#board/breweries">Breweries</a>
   </div>
 
   <script type="text/babel">
@@ -10,7 +10,9 @@
     this._route = ''
 
     this.onControl(riot.events.route.store.ROUTE_CHANGED, (route) => {
-      this._route = route
+      this._route = route.join('.')
+      console.log(this._route)
+      console.log('route', this._route)
       this.update()
     })
 

@@ -1,0 +1,52 @@
+import RiotControl from 'riotcontrol'
+import stores from '../store/stores'
+
+<board>
+
+  <div class="ui container">
+    <header></header>
+
+    <div id="mainview"></div>
+
+    <footer></footer>
+  </div>
+
+  <style scoped>
+    header {
+      margin: 40px;
+    }
+
+    footer {
+      margin: 40px;
+    }
+
+    .ui.divider {
+      margin: 30px;
+    }
+  </style>
+
+  <script type="text/babel">
+    this.on('mount', () => {
+      this.mixin('controlMixin')
+      this.mixin('viewContainerMixin', { container: this.mainview })
+
+      this.onControl(riot.events.route.store.ROUTE_CHANGED, (path) => {
+        console.log('path board', path, path[ 1 ])
+        if (!path[ 1 ]) return
+        switch (path[ 1 ]) {
+          case 'beers':
+            if (path[ 2 ]) {
+              this.loadView('beer-details', { beerId: path[ 2 ] })
+            } else {
+              this.loadView('beers')
+            }
+            break
+          default:
+            RiotControl.trigger(riot.events.route.view.GOTO, 'board/beers')
+        }
+      })
+    })
+
+
+  </script>
+</board>

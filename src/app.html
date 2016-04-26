@@ -3,44 +3,23 @@ import stores from './store/stores'
 
 <app>
 
-  <div class="ui container">
-    <header></header>
-
-    <div id="mainview"></div>
-
-    <footer></footer>
-  </div>
-
-  <style scoped>
-    header {
-      margin: 40px;
-    }
-
-    footer {
-      margin: 40px;
-    }
-
-    .ui.divider {
-      margin: 30px;
-    }
-  </style>
+  <div id="appview"></div>
 
   <script type="text/babel">
     this.mixin('controlMixin')
-    this.mixin('viewContainerMixin', { container: this.mainview })
+    this.mixin('viewContainerMixin', { container: this.appview })
 
     this.onControl(riot.events.route.store.ROUTE_CHANGED, (path) => {
-      if (!path[0]) return;
-      switch (path[0]) {
-        case 'beers':
-          if (path[1]) {
-            this.loadView('beer-details', {beerId: path[1], hey: 'lol'})
-          } else {
-            this.loadView('beers', {hey: 'lol'})
-          }
+      console.log('path app', path[ 0 ], path)
+      switch (path[ 0 ]) {
+        case 'signin':
+          this.loadView('signin')
+          break
+        case 'board':
+          this.loadView('board')
           break
         default:
-          RiotControl.trigger(riot.events.route.view.GOTO, 'beers')
+          RiotControl.trigger(riot.events.route.view.GOTO, 'signin')
       }
     })
 

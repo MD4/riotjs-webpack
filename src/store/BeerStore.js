@@ -1,4 +1,5 @@
 import dataBeers from '../res/data'
+import rest from '../rest/rest'
 
 class BeerStore {
   constructor() {
@@ -7,7 +8,10 @@ class BeerStore {
     this.initData()
 
     this.on(riot.events.beer.view.LOAD_BEERS, () => {
-      this.trigger(riot.events.beer.store.BEERS_CHANGED, this._beers)
+      console.log(rest)
+      rest.beer.Beer.all((beers) => {
+        this.trigger(riot.events.beer.store.BEERS_CHANGED, beers)
+      })
     })
 
     this.on(riot.events.beer.view.LOAD_BEER, (beerId) => {
