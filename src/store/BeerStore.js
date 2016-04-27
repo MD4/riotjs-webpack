@@ -8,14 +8,12 @@ class BeerStore {
     this.initData()
 
     this.on(riot.events.beer.view.LOAD_BEERS, () => {
-      console.log(rest)
       rest.beer.Beer.all((beers) => {
         this.trigger(riot.events.beer.store.BEERS_CHANGED, beers)
       })
     })
 
     this.on(riot.events.beer.view.LOAD_BEER, (beerId) => {
-      console.log(beerId)
       this.trigger(riot.events.beer.store.BEER_CHANGED, this.getBeerById(beerId + ''))
     })
 

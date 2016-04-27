@@ -8,8 +8,10 @@ class RouteStore {
     riot.route(this.onRoute)
 
     this.on(riot.events.route.view.GOTO, (route) => {
-      window.location.hash = route
+      riot.route(route)
     })
+
+    this.start()
   }
 
   onRoute(args) {

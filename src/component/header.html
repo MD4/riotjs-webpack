@@ -11,8 +11,6 @@
 
     this.onControl(riot.events.route.store.ROUTE_CHANGED, (route) => {
       this._route = route.join('.')
-      console.log(this._route)
-      console.log('route', this._route)
       this.update()
     })
 

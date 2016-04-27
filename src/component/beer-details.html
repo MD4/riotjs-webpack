@@ -14,7 +14,6 @@ import RiotControl from 'riotcontrol'
     })
 
     this.onControl(riot.events.beer.store.BEER_CHANGED, beer => {
-      console.log('beerChanged', beer)
       this._beer = beer
       this.update()
     })

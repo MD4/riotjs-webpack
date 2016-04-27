@@ -3,28 +3,23 @@ import stores from './store/stores'
 
 <app>
 
-  <div id="appview"></div>
+  <div id="app-view"></div>
 
   <script type="text/babel">
     this.mixin('controlMixin')
-    this.mixin('viewContainerMixin', { container: this.appview })
+    this.mixin('viewContainerMixin', { container: 'div#app-view' })
 
     this.onControl(riot.events.route.store.ROUTE_CHANGED, (path) => {
-      console.log('path app', path[ 0 ], path)
       switch (path[ 0 ]) {
         case 'signin':
           this.loadView('signin')
           break
         case 'board':
-          this.loadView('board')
+          this.loadView('board', {path: path})
           break
         default:
           RiotControl.trigger(riot.events.route.view.GOTO, 'signin')
       }
-    })
-
-    this.on('mount', () => {
-      stores.route.start()
     })
   </script>
 </app>

@@ -6,7 +6,7 @@ import stores from '../store/stores'
   <div class="ui container">
     <header></header>
 
-    <div id="mainview"></div>
+    <div id="board-view"></div>
 
     <footer></footer>
   </div>
@@ -26,27 +26,29 @@ import stores from '../store/stores'
   </style>
 
   <script type="text/babel">
-    this.on('mount', () => {
-      this.mixin('controlMixin')
-      this.mixin('viewContainerMixin', { container: this.mainview })
+    this.mixin('controlMixin')
+    this.mixin('viewContainerMixin', { container: 'div#board-view' })
 
-      this.onControl(riot.events.route.store.ROUTE_CHANGED, (path) => {
-        console.log('path board', path, path[ 1 ])
-        if (!path[ 1 ]) return
-        switch (path[ 1 ]) {
-          case 'beers':
-            if (path[ 2 ]) {
-              this.loadView('beer-details', { beerId: path[ 2 ] })
-            } else {
-              this.loadView('beers')
-            }
-            break
-          default:
-            RiotControl.trigger(riot.events.route.view.GOTO, 'board/beers')
-        }
-      })
-    })
+    this.updateRoute = (path) => {
+      if (path[0] !== 'board') return
+      switch (path[ 1 ]) {
+        case 'beers':
+          if (path[ 2 ]) {
+            this.loadView('beer-details', { beerId: path[ 2 ] })
+          } else {
+            this.loadView('beers')
+          }
+          break
+        case 'breweries':
+          this.loadView('breweries')
+          break
+        default:
+          RiotControl.trigger(riot.events.route.view.GOTO, 'board/beers')
+      }
+    }
 
+    this.on('mount', () => this.updateRoute(opts.path))
+    this.onControl(riot.events.route.store.ROUTE_CHANGED, this.updateRoute)
 
   </script>
 </board>

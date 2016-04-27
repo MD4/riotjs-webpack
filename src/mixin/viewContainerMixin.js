@@ -1,12 +1,13 @@
 riot.mixin('viewContainerMixin', {
-  currentView: null,
+  _currentView: null,
+  _currentViewName: null,
 
   loadView(viewName, data) {
+    if (this._currentViewName === viewName) return;
     if (this._currentView) {
       this._currentView.unmount(true)
     }
-    console.log('loadView', viewName, data)
-    console.log('loadView', this.container)
     this._currentView = riot.mount(this.container, viewName, data)[ 0 ]
+    this._currentViewName = viewName;
   }
 })
